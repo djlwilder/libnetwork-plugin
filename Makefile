@@ -162,7 +162,7 @@ bin/docker:
 	docker rm -f $(DOCKER_BINARY_CONTAINER)
 
 test-containerized: dist/libnetwork-plugin-$(ARCH) bin/docker
-	docker run -ti --rm --net=host \
+	docker run -t --rm --net=host \
 		-v $(CURDIR):/go/src/github.com/projectcalico/libnetwork-plugin \
 		-v /var/run/docker.sock:/var/run/docker.sock \
 		-v $(CURDIR)/.go-pkg-cache:/go/pkg/:rw \
