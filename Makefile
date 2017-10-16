@@ -139,6 +139,7 @@ run-plugin: run-etcd $(DIST)/libnetwork-plugin
 		-v $(PLUGIN_LOCATION):/libnetwork-plugin \
 		$(DIND_IMAGE) --cluster-store=etcd://$(LOCAL_IP_ENV):2379
 	# View the logs by running 'docker exec dind cat plugin.log'
+	docker exec -tid --privileged dind sh -c 'sysctl -w net.ipv6.conf.default.disable_ipv6=0'
 	docker exec -tid --privileged dind sh -c '/libnetwork-plugin 2>>/plugin.log'
 	# To speak to this docker:
 	# export DOCKER_HOST=localhost:5375
